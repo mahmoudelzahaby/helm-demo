@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{ include "labels" . }}
+
+
+
+{{- if .Values.metadata.name }}
+  name: {{ .Chart.Name }}-{{ .Values.metadata.name }}
+{{- else }}
+  name: bakehouse
+{{- end }}
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: bakehouse
+  template:
+    metadata:
+      labels:
+        {{ include "labels" . | indent 4 }}
+    spec:
+      containers:
+      - image: mahmoudahaby/jenkins-pro:4
+        name: {{ .Values.metadata.name }}
+        imagePullPolicy: Always
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        resources: {}

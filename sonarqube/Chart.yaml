@@ -1,0 +1,54 @@
+annotations:
+  artifacthub.io/changes: |
+    - kind: changed
+      description : "Update the list of supported kubernetes versions"
+    - kind: changed
+      description : "Set a new default (maximum) allowed size of the client request body on the ingress"
+    - kind: changed
+      description: "Update SonarQube to 9.9.0"
+    - kind: changed
+      description: "Mark 8.x.x chart as the LTS (SonarQube 9.9.x) chart"
+  artifacthub.io/containsSecurityUpdates: "false"
+  artifacthub.io/images: |
+    - name: sonarqube
+      image: sonarqube:9.9.0-community
+  artifacthub.io/links: |
+    - name: support
+      url: https://community.sonarsource.com/
+    - name: Chart Source
+      url: https://github.com/SonarSource/helm-chart-sonarqube/tree/master/charts/sonarqube
+apiVersion: v2
+appVersion: 9.9.0
+dependencies:
+- condition: postgresql.enabled
+  name: postgresql
+  repository: https://raw.githubusercontent.com/bitnami/charts/pre-2022/bitnami
+  version: 10.15.0
+- condition: nginx.enabled
+  name: ingress-nginx
+  repository: https://kubernetes.github.io/ingress-nginx
+  version: 4.0.13
+description: SonarQube offers Code Quality and Code Security analysis for up to 27
+  languages. Find Bugs, Vulnerabilities, Security Hotspots and Code Smells throughout
+  your workflow.
+home: https://www.sonarqube.org/
+icon: https://www.sonarqube.org/assets/logo-31ad3115b1b4b120f3d1efd63e6b13ac9f1f89437f0cf6881cc4d8b5603a52b4.svg
+keywords:
+- coverage
+- security
+- code
+- quality
+kubeVersion: '>= 1.19.0-0'
+maintainers:
+- email: leo.geoffroy+helm@sonarsource.com
+  name: leo-geoffroy-sonarsource
+- email: carmine.vassallo@sonarsource.com
+  name: carminevassallo
+- email: jeremy.cotineau@sonarsource.com
+  name: jCOTINEAU
+name: sonarqube
+sources:
+- https://github.com/SonarSource/docker-sonarqube
+- https://github.com/SonarSource/sonarqube
+type: application
+version: 8.0.0+463
